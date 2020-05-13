@@ -13,6 +13,10 @@ class AuthorAdmin(admin.ModelAdmin):
 # Register the admin class with the associated model
 admin.site.register(Author, AuthorAdmin)
 
+
+# class BooksInstanceInline(admin.TabularInline):
+#     model = BookInstance
+
 # Register the Admin classes for Book using the decorator
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -24,7 +28,10 @@ class BookAdmin(admin.ModelAdmin):
     display_genre.short_description = 'Genre'
 
     # Cannot add ManyToManyField genre here
+    fields = [('title', 'author'), 'summary', ('isbn', 'language'), 'genre']
     list_display = ('title', 'author', 'language', display_genre)
+
+    # inlines = [BooksInstanceInline]
 
 
 # Register the Admin classes for BookInstance using the decorator
