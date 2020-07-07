@@ -79,11 +79,19 @@ WSGI_APPLICATION = 'locallibrary.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # Name is the databse name pls create a database with name noticeboard in your postgres manually
+        'NAME': 'library',
+        # User is your database server user name
+        'USER': 'postgres',
+        # Password is database server password
+        'PASSWORD': 'postgres',
+        # it is the address of db server
+        'HOST': 'localhost',
+        # it is the port of db server
+        'PORT': "5432"
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
