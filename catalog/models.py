@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from .constants import LOAN_STATUS
 import uuid
 
 
@@ -79,13 +80,6 @@ class BookInstance(models.Model):
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
 
-    LOAN_STATUS = (
-        ('m', 'Maintenance'),
-        ('o', 'On loan'),
-        ('a', 'Available'),
-        ('r', 'Reserved'),
-    )
-
     status = models.CharField(
         max_length=1,
         choices=LOAN_STATUS,
@@ -99,4 +93,5 @@ class BookInstance(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.book.title}, {self.status}, {self.due_back}'
+        status = [t[1] for t in LOAN_STATUS if t[0].startswith(self.status)][0]
+        return f"{self.book.title}, {status}"
