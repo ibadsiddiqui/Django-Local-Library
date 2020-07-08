@@ -38,6 +38,7 @@ def index(request):
 class BookListView(generic.ListView):
     model = Book
     template_name = "book_list.html"
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
@@ -46,6 +47,11 @@ class BookListView(generic.ListView):
         context['some_data'] = 'This is just some data'
         return context
 
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = "book_detail.html"
+    
 
 def book_detail_view(request, primary_key):
     try:
