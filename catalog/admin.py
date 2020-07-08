@@ -30,7 +30,8 @@ class BookAdmin(admin.ModelAdmin):
     display_genre.short_description = 'Genre'
 
     # Cannot add ManyToManyField genre here
-    fields = [('title', 'author'), 'summary', ('isbn', 'language'), 'genre']
+    fields = [('title', 'author'), 'slug', 'summary',
+              ('isbn', 'language'), 'genre', ]
     list_display = ('title', 'author', 'language', display_genre)
 
     # inlines = [BooksInstanceInline]
