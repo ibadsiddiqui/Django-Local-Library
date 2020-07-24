@@ -53,10 +53,27 @@ class BookDetailView(generic.DetailView):
     template_name = "book_detail.html"
     
 
-def book_detail_view(request, primary_key):
-    try:
-        book = Book.objects.get(pk=primary_key)
-    except Book.DoesNotExist:
-        raise Http404('Book does not exist')
+class AuthorListView(generic.ListView):
+    model = Author
+    template_name = "author_list.html"
+    paginate_by = 10
 
-    return render(request, 'catalog/book_detail.html', context={'book': book})
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(AuthorListView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['some_data'] = 'This is just some data'
+        return context
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+    template_name = "author_detail.html"
+    
+
+# def book_detail_view(request, primary_key):
+#     try:
+#         book = Book.objects.get(pk=primary_key)
+#     except Book.DoesNotExist:
+#         raise Http404('Book does not exist')
+
+#     return render(request, 'catalog/book_detail.html', context={'book': book})
