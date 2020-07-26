@@ -51,7 +51,16 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = "book_detail.html"
-    
+
+
+# def book_detail_view(request, slug):
+#     try:
+#         book = Book.objects.get(slug=slug)
+#     except Book.DoesNotExist:
+#         raise Http404('Book does not exist')
+#     print(book.bookinstance)
+#     return render(request, 'book_detail.html', context={'book': book})
+
 
 class AuthorListView(generic.ListView):
     model = Author
@@ -65,15 +74,7 @@ class AuthorListView(generic.ListView):
         context['some_data'] = 'This is just some data'
         return context
 
+
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = "author_detail.html"
-    
-
-# def book_detail_view(request, primary_key):
-#     try:
-#         book = Book.objects.get(pk=primary_key)
-#     except Book.DoesNotExist:
-#         raise Http404('Book does not exist')
-
-#     return render(request, 'catalog/book_detail.html', context={'book': book})
